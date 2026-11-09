@@ -1,55 +1,224 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="eu" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
-<script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-1a/pXj49ZQ1aHEmrJ+gMw1otqoVsYwlEnlD8mIfY2TV03r20Y0CN7uqx1tQogjPL" crossorigin="anonymous"></script>  
+    <title>Egutegia eta Epeak - GrALgunea</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> 
 </head>
 
 <body>
-    <nav class="navbar md:navbar-expand bg-1">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Menua</a>
-            <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#navbarDrawer" aria-controls="navbarDrawer" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon" aria-hidden="true"></span>
-            </button>
-            <dialog class="drawer drawer-end" tabindex="-1" id="navbarDrawer" aria-labelledby="navbarDrawerLabel">
-            <div class="drawer-header">
-                <h5 class="drawer-title" id="navbarDrawerLabel">Menu</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+    <!-- Nabigazio Barra Bateratua -->
+    <nav class="navbar bg-body-tertiary shadow-sm sticky-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold fs-4 text-primary" href="./hasiera.html">GrALgunea</a>
+            
+            <div class="d-flex align-items-center gap-2">
+                <!-- Modu argia/iluna aldatzeko botoia -->
+                <button class="btn btn-outline-secondary btn-sm rounded-circle p-2 lh-1" id="btn-theme-toggle" type="button" aria-label="Aldatu gaia" style="width: 38px; height: 38px;">
+                    <span id="theme-icon">🌙</span>
+                </button>
+
+                <!-- Menua zabaltzeko botoia (Eskuinera mugitzen den Drawer-a aktibatzen du) -->
+                <button class="btn btn-primary d-flex align-items-center justify-content-center p-2 rounded-circle shadow-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#rightDrawer" aria-controls="rightDrawer" aria-label="Toggle navigation" style="width: 42px; height: 42px;">
+                    <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+                </button>
             </div>
-            <div class="drawer-body mb-2 md:mb-0">
-                <ul class="nav navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./egutegia.html">Egutegia</a>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link" type="button" data-bs-toggle="menu" aria-expanded="false">Araudia</button>
-                    <div class="menu">
-                    <a class="menu-item" href="./iaaraudia.html">Inegnieritza Informatikoa</a>
-                    <a class="menu-item" href="./infoaraudia">Adimen Artifiziala</a>
-                    <hr class="menu-divider">
-                    <a class="menu-item" href="./araudiorokorra">Araudi Orokorra</a>
-                    </div>
-                </li>
-                </ul>
-            </div>
-            </dialog>
         </div>
     </nav>
 
-    <h1>Ongi etorri gure webgunera!</h1>
-    <p>Hemen aurkituko duzu informazioa gure proiektuari buruz.</p>
+    <!-- Eskuinetik Ateratzen Den Menua (Offcanvas Drawer) -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="rightDrawer" aria-labelledby="rightDrawerLabel">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold text-primary" id="rightDrawerLabel">Menu Nagusia</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav fs-5">
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="./hasiera.html">🏠 Hasiera</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link active fw-semibold text-primary" aria-current="page" href="./egutegia.html">📅 Egutegia</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="./memoriak.html">📄 Memoriak</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="./galdetegia.html">❓ Galdetegia</a>
+                </li>
+                <li class="nav-item dropdown mb-2">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        ⚖️ Araudia
+                    </a>
+                    <ul class="dropdown-menu border-0 shadow-sm ps-3 bg-body-tertiary">
+                        <li><a class="dropdown-item py-2" href="./iaaraudia.html">Informatika Ingeniaritza</a></li>
+                        <li><a class="dropdown-item py-2" href="./infoaraudia.html">Adimen Artifiziala</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item py-2" href="./araudiorokorra.html">Araudi Orokorra</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="./about.html">👥 About Us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
+    <!-- Edukia -->
+    <div class="container my-5">
+        <div class="p-5 mb-4 bg-body-secondary rounded-3 shadow-sm">
+            <div class="container-fluid py-3">
+                <h1 class="display-5 fw-bold text-primary">Egutegia eta Epeak</h1>
+                <p class="col-md-10 fs-4 text-secondary">Gradu Amaierako Lana arrakastaz bideratzeko epeak eta faseak.</p>
+                <p class="lead">Gradu Amaierako Lana arrakastaz bideratzeko, funtsezkoa da urrats bakoitza garaiz eta forman egitea. Hemen aurkituko dituzu ikasturtean zehar jarraitu beharreko fase nagusiak eta deialdi desberdinen epeak.</p>
+            </div>
+        </div>
 
+        <section class="mb-5">
+            <h2 class="h3 mb-4 text-body fw-bold">1. GrALaren Bidea: Jarraitu Beharreko Urratsak</h2>
+            <p class="text-secondary mb-4">Prozesuak 5 fase nagusi ditu:</p>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">1. Fasea</span>
+                            <h5 class="card-title">Inskripzioa eta Gai Aukeraketa</h5>
+                            <ul class="card-text small ps-3 mt-2">
+                                <li><strong>Adostutako lanak:</strong> Ikaslea irakaslearekin harremanetan jartzen da lana definitzeko.</li>
+                                <li><strong>Eskainitako lanak:</strong> Sailek argitaratutako zerrendatik aukeratu.</li>
+                                <li><strong>Kanpo-erakundeak:</strong> Enpresa edo mugikortasun hitzarmena bideratu.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-    <footer>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">2. Fasea</span>
+                            <h5 class="card-title">Matrikulazioa</h5>
+                            <p class="card-text small">Unibertsitatearen matrikula-epe orokorrean egiten da (gradua amaitzeko falta diren irakasgai guztietan matrikulatuta egon behar da).</p>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">3. Fasea</span>
+                            <h5 class="card-title">Garapena & Tutoretzak</h5>
+                            <p class="card-text small">Zuzendariaren gidaritzapean lana egiten da, gutxienez 200 hitzeko Garapen Jasangarriaren Helburuen gogoeta eta atal etikoak txertatuz.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">4. Fasea</span>
+                            <h5 class="card-title">ADDI Gordailua</h5>
+                            <p class="card-text small">Lana amaitzean, memoria digitala (eta aukeran posterra) UPV/EHUko ADDI gordailu akademikoan kargatzen da.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">5. Fasea</span>
+                            <h5 class="card-title">Defentsa Publikoa</h5>
+                            <p class="card-text small">Prozesu osoa burutu ondoren lana izendatutako epaimahai baten aurrean aurkeztu eta defendatu egiten da.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-5">
+            <h2 class="h3 mb-4 text-body fw-bold">2. Ikasturteko Deialdiak eta Epeak (Orientagarria)</h2>
+            <p class="text-secondary mb-3">Ikasturte akademiko bakoitzean lau deialdi ofizial irekitzen dira eta matrikulak bi egiteko eskubidea ematen du. Fakultateko Batzordeak urtero onartzen du egutegi zehatza.</p>
+            
+            <div class="table-responsive shadow-sm rounded">
+                <table class="table table-striped table-hover align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Deialdia</th>
+                            <th>Matrikula eta Defentsa-eskaera</th>
+                            <th>Lana Kargatu eta Posterra Bidali</th>
+                            <th>Defentsa-aldia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. Deialdia (Azaroa)</strong></td>
+                            <td>Urriaren erdialdera arte</td>
+                            <td>Urriaren amaierara arte</td>
+                            <td>Azaroaren hasieran</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Deialdia (Otsaila)</strong></td>
+                            <td>Otsailaren hasierara arte</td>
+                            <td>Otsailaren lehen astera arte</td>
+                            <td>Otsailaren amaieran</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. Deialdia (Uztaila)</strong></td>
+                            <td>Ekainaren bigarren astera arte</td>
+                            <td>Ekainaren erdialdera arte</td>
+                            <td>Uztailaren erdialdean</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. Deialdia (Iraila)</strong></td>
+                            <td>Irailaren hasierara arte</td>
+                            <td>Irailaren lehen astera arte</td>
+                            <td>Irailaren amaieran</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="mb-4">
+            <h2 class="h3 mb-4 text-body fw-bold">3. Defentsa Eguneko Informazio Garrantzitsua</h2>
+            <div class="card shadow-sm border-0 bg-body-tertiary">
+                <div class="card-body">
+                    <ul class="mb-0">
+                        <li class="mb-2"><strong>Deialdiaren argitalpena:</strong> Defentsaren tokia, eguna eta ordua gutxienez 3 egun lehenago argitaratuko dira ikastegiko atarian/webgunean.</li>
+                        <li class="mb-2"><strong>Denbora-muga:</strong> Ikasleak 20 minutuko denbora gomendatua izango du aurkezpenerako (gehienez 30 minutu). Ondoren, epaimahaiak galderak egingo ditu.</li>
+                        <li><strong>Posterra:</strong> Gomendagarria da proiektuaren ezaugarri nagusiak biltzen dituen poster bertikala egitea, Fakultateko hallean ikusgai jartzeko.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Oina -->
+    <footer class="bg-body-tertiary text-body py-4 mt-5 border-top">
+        <div class="container text-center">
+            <p class="mb-1 fw-bold">Informatika Fakultatea</p>
+            <p class="mb-0 text-secondary">Manuel Lardizabal pasealekua, 1, 20018 Donostia / San Sebastián, Gipuzkoa</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logika -->
+    <script>
+        const themeToggleBtn = document.getElementById('btn-theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-bs-theme');
+            if (currentTheme === 'dark') {
+                htmlElement.setAttribute('data-bs-theme', 'light');
+                themeIcon.textContent = '🌙';
+            } else {
+                htmlElement.setAttribute('data-bs-theme', 'dark');
+                themeIcon.textContent = '☀️';
+            }
+        });
+    </script>
 </body>
-
 </html>
