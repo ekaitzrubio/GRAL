@@ -15,11 +15,6 @@
             <a class="navbar-brand fw-bold fs-4 text-primary" href="./index.html">GrALgunea</a>
             
             <div class="d-flex align-items-center gap-2">
-                <!-- Modu argia/iluna aldatzeko botoia -->
-                <button class="btn btn-outline-secondary btn-sm rounded-circle p-2 lh-1" id="btn-theme-toggle" type="button" aria-label="Aldatu gaia" style="width: 38px; height: 38px;">
-                    <span id="theme-icon">🌙</span>
-                </button>
-
                 <!-- Menua zabaltzeko botoia (Eskuinera mugitzen den Drawer-a aktibatzen du) -->
                 <button class="btn btn-primary d-flex align-items-center justify-content-center p-2 rounded-circle shadow-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#rightDrawer" aria-controls="rightDrawer" aria-label="Toggle navigation" style="width: 42px; height: 42px;">
                     <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
@@ -203,22 +198,6 @@
         </div>
     </footer>
 
-    <!-- JavaScript Logika -->
-    <script>
-        const themeToggleBtn = document.getElementById('btn-theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
-        const htmlElement = document.documentElement;
-
-        themeToggleBtn.addEventListener('click', () => {
-            const currentTheme = htmlElement.getAttribute('data-bs-theme');
-            if (currentTheme === 'dark') {
-                htmlElement.setAttribute('data-bs-theme', 'light');
-                themeIcon.textContent = '🌙';
-            } else {
-                htmlElement.setAttribute('data-bs-theme', 'dark');
-                themeIcon.textContent = '☀️';
-            }
-        });
     </script>
 </body>
 </html>
