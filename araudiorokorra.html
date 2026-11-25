@@ -5,29 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Araudia - GrALgunea</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> 
 </head>
 
 <body>
+    <!-- SVG iragazkiak daltonismo motetarako -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none" aria-hidden="true">
+        <defs>
+            <filter id="protanopia-filter">
+                <feColorMatrix type="matrix" values="
+                    0.567 0.433 0.000 0 0
+                    0.558 0.442 0.000 0 0
+                    0.000 0.242 0.758 0 0
+                    0.000 0.000 0.000 1 0" />
+            </filter>
+            <filter id="deuteranopia-filter">
+                <feColorMatrix type="matrix" values="
+                    0.625 0.375 0.000 0 0
+                    0.700 0.300 0.000 0 0
+                    0.000 0.300 0.700 0 0
+                    0.000 0.000 0.000 1 0" />
+            </filter>
+            <filter id="tritanopia-filter">
+                <feColorMatrix type="matrix" values="
+                    0.950 0.050 0.000 0 0
+                    0.000 0.433 0.567 0 0
+                    0.000 0.475 0.525 0 0
+                    0.000 0.000 0.000 1 0" />
+            </filter>
+        </defs>
+    </svg>
+
     <!-- Nabigazio Barra Bateratua -->
     <nav class="navbar bg-body-tertiary shadow-sm sticky-top">
         <div class="container-fluid px-4">
             <a class="navbar-brand fw-bold fs-4 text-primary" href="./index.html">GrALgunea</a>
             
             <div class="d-flex align-items-center gap-2">
-                <!-- Menua zabaltzeko botoia (Eskuinera mugitzen den Drawer-a aktibatzen du) -->
-                <button class="btn btn-primary d-flex align-items-center justify-content-center p-2 rounded-circle shadow-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#rightDrawer" aria-controls="rightDrawer" aria-label="Toggle navigation" style="width: 42px; height: 42px;">
+                <button class="btn btn-primary d-flex align-items-center justify-content-center p-2 rounded-circle shadow-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#rightDrawer" aria-controls="rightDrawer" aria-label="Menua ireki" style="width: 42px; height: 42px;">
                     <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
                 </button>
             </div>
         </div>
     </nav>
 
+    <!-- Bigarren Barra: Irisgarritasun Aukerak -->
+    <div class="a11y-bar bg-body-secondary border-bottom py-2 px-4" role="region" aria-label="Irisgarritasun aukerak">
+        <div class="container-fluid d-flex flex-wrap align-items-center justify-content-between gap-2">
+            <span class="fw-semibold text-body">♿ Irisgarritasuna:</span>
+
+            <div class="d-flex flex-wrap align-items-center gap-2">
+                <div class="btn-group btn-group-sm" role="group" aria-label="Letra tamaina">
+                    <button type="button" class="btn btn-outline-secondary" id="btn-font-dec" title="Letra txikiagotu">A-</button>
+                    <button type="button" class="btn btn-outline-secondary" id="btn-font-reset" title="Letra tamaina lehenetsia">A</button>
+                    <button type="button" class="btn btn-outline-secondary" id="btn-font-inc" title="Letra handitu">A+</button>
+                </div>
+
+                <button type="button" class="btn btn-sm btn-outline-secondary" id="btn-theme-toggle" aria-label="Aldatu modu argia edo iluna">
+                    <span id="theme-icon">🌙</span> <span id="theme-label">Modu iluna</span>
+                </button>
+
+                <button type="button" class="btn btn-sm btn-outline-secondary" id="btn-contrast-toggle" aria-pressed="false">
+                    ◐ Kontraste handia
+                </button>
+
+                <div class="d-flex align-items-center gap-1">
+                    <label for="select-colorblind" class="visually-hidden">Daltonismo mota</label>
+                    <select id="select-colorblind" class="form-select form-select-sm" style="width: auto;" aria-label="Daltonismo mota aukeratu">
+                        <option value="none">Kolore normala</option>
+                        <option value="protanopia">Protanopia (Gorria)</option>
+                        <option value="deuteranopia">Deuteranopia (Berdea)</option>
+                        <option value="tritanopia">Tritanopia (Urdina)</option>
+                    </select>
+                </div>
+
+                <button type="button" class="btn btn-sm btn-outline-danger" id="btn-a11y-reset" title="Aukera guztiak berrezarri">
+                    ↺ Berrezarri
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Eskuinetik Ateratzen Den Menua (Offcanvas Drawer) -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="rightDrawer" aria-labelledby="rightDrawerLabel">
         <div class="offcanvas-header border-bottom">
             <h5 class="offcanvas-title fw-bold text-primary" id="rightDrawerLabel">Menu Nagusia</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Itxi"></button>
         </div>
         <div class="offcanvas-body">
             <ul class="navbar-nav fs-5">
@@ -43,8 +107,8 @@
                 <li class="nav-item mb-2">
                     <a class="nav-link" href="./galdetegia.html">❓ Galdetegia</a>
                 </li>
-                <li class="nav-item dropdown mb-2">
-                    <a class="nav-link" href="./araudiorokorra.html">⚖️ Araudia</a>
+                <li class="nav-item mb-2">
+                    <a class="nav-link active fw-semibold text-primary" aria-current="page" href="./araudia.html">⚖️ Araudia</a>
                 </li>
                 <li class="nav-item mb-2">
                     <a class="nav-link" href="./about.html">👥 About Us</a>
@@ -54,144 +118,146 @@
     </div>
 
     <!-- Edukia -->
-    <div class="container my-5">
-        <!-- Goiburukoa -->
-        <div class="p-5 mb-4 bg-body-secondary rounded-3 shadow-sm">
-            <div class="container-fluid py-3">
-                <h1 class="display-5 fw-bold text-primary">Araudia eta Esparru Juridikoa</h1>
-                <p class="col-md-10 fs-4 text-secondary">Fakultateko eta Unibertsitateko Gradu Amaierako Lanen arau ofizialak.</p>
-                <p class="lead">Eremu honetan Informatika Fakultateko (Informatika Ingeniaritza eta Adimen Artifiziala) zein Euskal Herriko Unibertsitateko (UPV/EHU) Gradu Amaierako Lanen inguruko esparru juridiko eta araudi ofizialak biltzen dira.</p>
+    <div id="a11y-target">
+        <div class="container my-5">
+            <!-- Goiburukoa -->
+            <div class="p-5 mb-4 bg-body-secondary rounded-3 shadow-sm">
+                <div class="container-fluid py-3">
+                    <h1 class="display-5 fw-bold text-primary">Araudia eta Esparru Juridikoa</h1>
+                    <p class="col-md-10 fs-4 text-secondary">Fakultateko eta Unibertsitateko Gradu Amaierako Lanen arau ofizialak.</p>
+                    <p class="lead">Eremu honetan Informatika Fakultateko (Informatika Ingeniaritza eta Adimen Artifiziala) zein Euskal Herriko Unibertsitateko (UPV/EHU) Gradu Amaierako Lanen inguruko esparru juridiko eta araudi ofizialak biltzen dira.</p>
+                </div>
             </div>
+
+            <!-- 1. Araudi Esparru Nagusiak -->
+            <section class="mb-5">
+                <h2 class="h3 mb-4 text-body fw-bold">1. Araudi Esparru Nagusiak</h2>
+                <p class="text-secondary mb-4">GrALa egiteko, ebaluatzeko eta defendatzeko prozesuak bi araudi-maila nagusiren bidez erregulatzen dira:</p>
+                
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                <h3 class="h5 text-primary fw-bold mb-3">UPV/EHUko Araudi Orokorra</h3>
+                                <ul class="small text-secondary ps-3 mb-0">
+                                    <li class="mb-2"><strong>Araudi ofiziala:</strong> UPV/EHUn Gradu Amaierako Lana egin eta defendatzeari buruzko Arautegia (Gobernu Kontseilua, 2023ko abenduaren 14a; EHAA, 2024ko apirilaren 10a).</li>
+                                    <li><strong>Helburua:</strong> UPV/EHUko titulu guztietan irizpideak homogeneizatzea eta RD 822/2021 Errege Dekretuaren zein i3 hezkuntza-ereduaren printzipioak bermatzea.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                <h3 class="h5 text-primary fw-bold mb-3">Informatika Fakultateko Araudi Zehatzak</h3>
+                                <ul class="small text-secondary ps-3 mb-0">
+                                    <li class="mb-2"><strong>Informatika Ingeniaritzako Gradua:</strong> Fakultate Batzarrak onartutako arautegi zehatza.</li>
+                                    <li><strong>Adimen Artifizialeko Gradua:</strong> Adimen Artifizialeko graduko ezaugarriei egokitutako arautegi zehatza.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Araudiaren Puntu Nabarmenen Laburpena -->
+            <section class="mb-5">
+                <h2 class="h3 mb-4 text-body fw-bold">2. Araudiaren Puntu Nabarmenen Laburpena</h2>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm border-0 bg-body-tertiary">
+                            <div class="card-body">
+                                <h4 class="h5 fw-bold mb-3">2.1. Defentsarako eta Matrikularako Baldintzak</h4>
+                                <ul class="small text-secondary ps-3 mb-0">
+                                    <li class="mb-2"><strong>Matrikulazioa:</strong> Unibertsitatearen matrikula-epe orokorrean egiten da. Falta diren irakasgai guztietan matrikulatuta egon behar da.</li>
+                                    <li class="mb-2"><strong>Defentsarako baldintza:</strong> Gehienez hautazko 3 irakasgai (gehienez 18 ECTS) falta izatea onartzen da.</li>
+                                    <li><strong>Deialdiak:</strong> Ikasturte bakoitzean bi deialdi ofizial egiteko eskubidea ematen du.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm border-0 bg-body-tertiary">
+                            <div class="card-body">
+                                <h4 class="h5 fw-bold mb-3">2.2. Lan Mota eta Zuzendaritza</h4>
+                                <ul class="small text-secondary ps-3 mb-0">
+                                    <li class="mb-2"><strong>Mota desberdinak:</strong> Adostutako lanak (ikaslea-irakaslea), Sailek eskainitakoak eta Kanpo-erakundeetako lanak (enpresak, mugikortasunak).</li>
+                                    <li><strong>Zuzendaritza:</strong> Fakultateko irakasle batek zuzendua gutxienez. Kanpoko erakundeetan tutore akademiko batekin.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm border-0 bg-body-tertiary">
+                            <div class="card-body">
+                                <h4 class="h5 fw-bold mb-3">2.3. Memoriaren Ezaugarriak eta Hizkuntza</h4>
+                                <ul class="small text-secondary ps-3 mb-0">
+                                    <li class="mb-2"><strong>Hizkuntza:</strong> Euskaraz, gaztelaniaz edo ingelesez. Memoria defendatuko den hizkuntza berean idatzi behar da.</li>
+                                    <li class="mb-2"><strong>Formatua eta Luzera:</strong> Fakultateko azala erabili; gomendatutako luzera ~60 orrialde (eranskinak kanpo).</li>
+                                    <li><strong>Gordailua:</strong> ADDI unibertsitateko gordailu akademikoan kargatu behar da.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm border-0 bg-body-tertiary">
+                            <div class="card-body">
+                                <h4 class="h5 fw-bold mb-3">2.4. Jasangarritasuna eta Etika</h4>
+                                <ul class="small text-secondary ps-3 mb-0">
+                                    <li class="mb-2"><strong>GJH eta EHUagenda 2030:</strong> Gutxienez 200 hitzeko gogoeta jaso behar da jasangarritasunarekin eta giza eskubideekin lotuta.</li>
+                                    <li><strong>Inplikazio etikoak:</strong> Datu pertsonalekin, gizakiekin edo animaliekin lan eginez gero, Etika Batzordearen baimena behar da.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm border-0 mt-4 bg-body-tertiary">
+                    <div class="card-body">
+                        <h4 class="h5 fw-bold mb-3">2.5. Kalifikazioa eta Epaimahaia</h4>
+                        <ul class="small text-secondary ps-3 mb-0">
+                            <li class="mb-2"><strong>Epaimahaia:</strong> Hiru kidek osatuko dute (Lehendakaria, Idazkaria eta Kidea).</li>
+                            <li class="mb-2"><strong>Kalifikazio-eskala:</strong> 0tik 10era bitartekoa (Ez Aurkeztua, Suspentso 0-4.9, Gainditua 5.0-6.9, Oso Ongi 7.0-8.9, Bikain 9.0-10).</li>
+                            <li><strong>Ohorezko Matrikula:</strong> 9.0 edo altuagoa duten lanen artean, gehienez matrikulatuen %5ari eman dakioke.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Dokumentu Ofizialak Deskargatzea -->
+            <section class="mb-4">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <h2 class="h3 mb-3 text-body fw-bold">3. Dokumentu Ofizialak Deskargatzea</h2>
+                        <p class="text-secondary mb-3">Hemen kontsulta ditzakezu testu osoak deskargatzeko dokumentuak:</p>
+                        
+                        <div class="list-group list-group-flush">
+                            <a href="https://drive.google.com/file/d/13plDvckGOiSIX-fEKOg9MhSMM9yI9W5R/view" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action bg-transparent text-primary">1. UPV/EHUko GrAL Arautegi Orokorra (Euskaraz)</a>
+                            <a href="https://drive.google.com/file/d/1CivKWO3FnJCwgNcLAIDF9A6rjK8LR-FM/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action bg-transparent text-primary">2. Reglamento sobre la elaboración y defensa del TFG (UPV/EHU - Castellano)</a>
+                            <a href="https://drive.google.com/file/d/1UjP-Wu336fQbBnUelSCP7iitV7-iE6SK/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action bg-transparent text-primary">3. Informatika Ingeniaritzako Graduko Araudia (Euskaraz)</a>
+                            <a href="https://drive.google.com/file/d/1RcYbj8mBjzq0C7lwDjcwL1pQCILe2d4K/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action bg-transparent text-primary">4. Normativa TFG - Grado en Ingeniería Informática (Castellano)</a>
+                            <a href="https://drive.google.com/file/d/1h8aSgnXn4zjVtvCAcMxQvfGLIFNuv8aI/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action bg-transparent text-primary">5. Adimen Artifizialeko Graduko Araudia (Euskaraz)</a>
+                            <a href="https://drive.google.com/file/d/1Ebb5EvmZmaYdeSHINhxAwdIupXJKeRep/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action bg-transparent text-primary">6. Normativa TFG - Grado en Inteligencia Artificial (Castellano)</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <!-- 1. Araudi Esparru Nagusiak -->
-        <section class="mb-5">
-            <h2 class="h3 mb-4 text-body fw-bold">1. Araudi Esparru Nagusiak</h2>
-            <p class="text-secondary mb-4">GrALa egiteko, ebaluatzeko eta defendatzeko prozesuak bi araudi-maila nagusiren bidez erregulatzen dira:</p>
-            
-            <div class="row g-4">
-                <div class="col-lg-6">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body">
-                            <h3 class="h5 text-primary fw-bold mb-3">UPV/EHUko Araudi Orokorra</h3>
-                            <ul class="small text-secondary ps-3 mb-0">
-                                <li class="mb-2"><strong>Araudi ofiziala:</strong> UPV/EHUn Gradu Amaierako Lana egin eta defendatzeari buruzko Arautegia (Gobernu Kontseilua, 2023ko abenduaren 14a; EHAA, 2024ko apirilaren 10a).</li>
-                                <li><strong>Helburua:</strong> UPV/EHUko titulu guztietan irizpideak homogeneizatzea eta RD 822/2021 Errege Dekretuaren zein i3 hezkuntza-ereduaren printzipioak bermatzea.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body">
-                            <h3 class="h5 text-primary fw-bold mb-3">Informatika Fakultateko Araudi Zehatzak</h3>
-                            <ul class="small text-secondary ps-3 mb-0">
-                                <li class="mb-2"><strong>Informatika Ingeniaritzako Gradua:</strong> Fakultate Batzarrak onartutako arautegi zehatza.</li>
-                                <li><strong>Adimen Artifizialeko Gradua:</strong> Adimen Artifizialeko graduko ezaugarriei egokitutako arautegi zehatza.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+        <!-- Oina -->
+        <footer class="bg-body-tertiary text-body py-4 mt-5 border-top">
+            <div class="container text-center">
+                <p class="mb-1 fw-bold">Informatika Fakultatea</p>
+                <p class="mb-0 text-secondary">Manuel Lardizabal pasealekua, 1, 20018 Donostia / San Sebastián, Gipuzkoa</p>
             </div>
-        </section>
-
-        <!-- 2. Araudiaren Puntu Nabarmenen Laburpena -->
-        <section class="mb-5">
-            <h2 class="h3 mb-4 text-body fw-bold">2. Araudiaren Puntu Nabarmenen Laburpena</h2>
-            
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="card h-100 shadow-sm border-0 bg-body-tertiary">
-                        <div class="card-body">
-                            <h4 class="h5 fw-bold mb-3">2.1. Defentsarako eta Matrikularako Baldintzak</h4>
-                            <ul class="small text-secondary ps-3 mb-0">
-                                <li class="mb-2"><strong>Matrikulazioa:</strong> Unibertsitatearen matrikula-epe orokorrean egiten da. Falta diren irakasgai guztietan matrikulatuta egon behar da.</li>
-                                <li class="mb-2"><strong>Defentsarako baldintza:</strong> Gehienez hautazko 3 irakasgai (gehienez 18 ECTS) falta izatea onartzen da.</li>
-                                <li><strong>Deialdiak:</strong> Ikasturte bakoitzean bi deialdi ofizial egiteko eskubidea ematen du.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="card h-100 shadow-sm border-0 bg-body-tertiary">
-                        <div class="card-body">
-                            <h4 class="h5 fw-bold mb-3">2.2. Lan Mota eta Zuzendaritza</h4>
-                            <ul class="small text-secondary ps-3 mb-0">
-                                <li class="mb-2"><strong>Mota desberdinak:</strong> Adostutako lanak (ikaslea-irakaslea), Sailek eskainitakoak eta Kanpo-erakundeetako lanak (enpresak, mugikortasunak).</li>
-                                <li><strong>Zuzendaritza:</strong> Fakultateko irakasle batek zuzendua gutxienez. Kanpoko erakundeetan tutore akademiko batekin.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="card h-100 shadow-sm border-0 bg-body-tertiary">
-                        <div class="card-body">
-                            <h4 class="h5 fw-bold mb-3">2.3. Memoriaren Ezaugarriak eta Hizkuntza</h4>
-                            <ul class="small text-secondary ps-3 mb-0">
-                                <li class="mb-2"><strong>Hizkuntza:</strong> Euskaraz, gaztelaniaz edo ingelesez. Memoria defendatuko den hizkuntza berean idatzi behar da.</li>
-                                <li class="mb-2"><strong>Formatua eta Luzera:</strong> Fakultateko azala erabili; gomendatutako luzera ~60 orrialde (eranskinak kanpo).</li>
-                                <li><strong>Gordailua:</strong> ADDI unibertsitateko gordailu akademikoan kargatu behar da.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="card h-100 shadow-sm border-0 bg-body-tertiary">
-                        <div class="card-body">
-                            <h4 class="h5 fw-bold mb-3">2.4. Jasangarritasuna eta Etika</h4>
-                            <ul class="small text-secondary ps-3 mb-0">
-                                <li class="mb-2"><strong>GJH eta EHUagenda 2030:</strong> Gutxienez 200 hitzeko gogoeta jaso behar da jasangarritasunarekin eta giza eskubideekin lotuta.</li>
-                                <li><strong>Inplikazio etikoak:</strong> Datu pertsonalekin, gizakiekin edo animaliekin lan eginez gero, Etika Batzordearen baimena behar da.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card shadow-sm border-0 mt-4 bg-body-tertiary">
-                <div class="card-body">
-                    <h4 class="h5 fw-bold mb-3">2.5. Kalifikazioa eta Epaimahaia</h4>
-                    <ul class="small text-secondary ps-3 mb-0">
-                        <li class="mb-2"><strong>Epaimahaia:</strong> Hiru kidek osatuko dute (Lehendakaria, Idazkaria eta Kidea).</li>
-                        <li class="mb-2"><strong>Kalifikazio-eskala:</strong> 0tik 10era bitartekoa (Ez Aurkeztua, Suspentso 0-4.9, Gainditua 5.0-6.9, Oso Ongi 7.0-8.9, Bikain 9.0-10).</li>
-                        <li><strong>Ohorezko Matrikula:</strong> 9.0 edo altuagoa duten lanen artean, gehienez matrikulatuen %5ari eman dakioke.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. Dokumentu Ofizialak Deskargatzea -->
-        <section class="mb-4">
-            <div class="card shadow-sm border-0">
-                <div class="card-body p-4">
-                    <h2 class="h3 mb-3 text-body fw-bold">3. Dokumentu Ofizialak Deskargatzea</h2>
-                    <p class="text-secondary mb-3">Hemen kontsulta ditzakezu testu osoak deskargatzeko dokumentuak:</p>
-                    
-                    <div class="list-group list-group-flush">
-                        <a href="https://drive.google.com/file/d/13plDvckGOiSIX-fEKOg9MhSMM9yI9W5R/view" class="list-group-item list-group-item-action bg-transparent text-primary">1. UPV/EHUko GrAL Arautegi Orokorra (Euskaraz)</a>
-                        <a href="https://drive.google.com/file/d/1CivKWO3FnJCwgNcLAIDF9A6rjK8LR-FM/view?usp=drive_link" class="list-group-item list-group-item-action bg-transparent text-primary">2. Reglamento sobre la elaboración y defensa del TFG (UPV/EHU - Castellano)</a>
-                        <a href="https://drive.google.com/file/d/1UjP-Wu336fQbBnUelSCP7iitV7-iE6SK/view?usp=drive_link" class="list-group-item list-group-item-action bg-transparent text-primary">3. Informatika Ingeniaritzako Graduko Araudia (Euskaraz)</a>
-                        <a href="https://drive.google.com/file/d/1RcYbj8mBjzq0C7lwDjcwL1pQCILe2d4K/view?usp=drive_link" class="list-group-item list-group-item-action bg-transparent text-primary">4. Normativa TFG - Grado en Ingeniería Informática (Castellano)</a>
-                        <a href="https://drive.google.com/file/d/1h8aSgnXn4zjVtvCAcMxQvfGLIFNuv8aI/view?usp=drive_link" class="list-group-item list-group-item-action bg-transparent text-primary">5. Adimen Artifizialeko Graduko Araudia (Euskaraz)</a>
-                        <a href="https://drive.google.com/file/d/1Ebb5EvmZmaYdeSHINhxAwdIupXJKeRep/view?usp=drive_link" class="list-group-item list-group-item-action bg-transparent text-primary">6. Normativa TFG - Grado en Inteligencia Artificial (Castellano)</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </footer>
     </div>
 
-    <!-- Oina -->
-    <footer class="bg-body-tertiary text-body py-4 mt-5 border-top">
-        <div class="container text-center">
-            <p class="mb-1 fw-bold">Informatika Fakultatea</p>
-            <p class="mb-0 text-secondary">Manuel Lardizabal pasealekua, 1, 20018 Donostia / San Sebastián, Gipuzkoa</p>
-        </div>
-    </footer>
-
-
+    <script src="./js/script.js"></script>
 </body>
 </html>

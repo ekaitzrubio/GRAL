@@ -1,0 +1,42 @@
+:root {
+    --font-scale: 1;
+}
+
+html {
+    font-size: calc(16px * var(--font-scale));
+}
+
+/* Kontraste handia */
+html.a11y-high-contrast body {
+    filter: contrast(1.25);
+}
+
+html.a11y-high-contrast .card,
+html.a11y-high-contrast .list-group-item,
+html.a11y-high-contrast .form-select,
+html.a11y-high-contrast .btn {
+    border-width: 2px !important;
+}
+
+html.a11y-high-contrast a:not(.btn) {
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* Daltonismo profilak */
+html.a11y-vision-protanopia #a11y-target {
+    filter: url("#protanopia-filter");
+}
+
+html.a11y-vision-deuteranopia #a11y-target {
+    filter: url("#deuteranopia-filter");
+}
+
+html.a11y-vision-tritanopia #a11y-target {
+    filter: url("#tritanopia-filter");
+}
+
+/* Irisgarritasun barra */
+.a11y-bar {
+    font-size: 0.9rem;
+}

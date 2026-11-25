@@ -5,29 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GrALgunea - Informatika Fakultatea (UPV/EHU)</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> 
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <!-- Nabigazio Barra Bateratua -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none" aria-hidden="true">
+        <defs>
+            <filter id="protanopia-filter">
+                <feColorMatrix type="matrix" values="
+                    0.567 0.433 0.000 0 0
+                    0.558 0.442 0.000 0 0
+                    0.000 0.242 0.758 0 0
+                    0.000 0.000 0.000 1 0" />
+            </filter>
+            <filter id="deuteranopia-filter">
+                <feColorMatrix type="matrix" values="
+                    0.625 0.375 0.000 0 0
+                    0.700 0.300 0.000 0 0
+                    0.000 0.300 0.700 0 0
+                    0.000 0.000 0.000 1 0" />
+            </filter>
+            <filter id="tritanopia-filter">
+                <feColorMatrix type="matrix" values="
+                    0.950 0.050 0.000 0 0
+                    0.000 0.433 0.567 0 0
+                    0.000 0.475 0.525 0 0
+                    0.000 0.000 0.000 1 0" />
+            </filter>
+        </defs>
+    </svg>
+
     <nav class="navbar bg-body-tertiary shadow-sm sticky-top">
         <div class="container-fluid px-4">
             <a class="navbar-brand fw-bold fs-4 text-primary" href="./index.html">GrALgunea</a>
-            
             <div class="d-flex align-items-center gap-2">
-                <!-- Menua zabaltzeko botoia (Eskuinera mugitzen den Drawer-a aktibatzen du) -->
-                <button class="btn btn-primary d-flex align-items-center justify-content-center p-2 rounded-circle shadow-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#rightDrawer" aria-controls="rightDrawer" aria-label="Toggle navigation" style="width: 42px; height: 42px;">
+                <button class="btn btn-primary d-flex align-items-center justify-content-center p-2 rounded-circle shadow-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#rightDrawer" aria-controls="rightDrawer" aria-label="Menua ireki" style="width: 42px; height: 42px;">
                     <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Eskuinetik Ateratzen Den Menua (Offcanvas Drawer) -->
+    <div class="a11y-bar bg-body-secondary border-bottom py-2 px-4" role="region" aria-label="Irisgarritasun aukerak">
+        <div class="container-fluid d-flex flex-wrap align-items-center justify-content-between gap-2">
+            <span class="fw-semibold text-body">♿ Irisgarritasuna:</span>
+            <div class="d-flex flex-wrap align-items-center gap-2">
+                <div class="btn-group btn-group-sm" role="group" aria-label="Letra tamaina">
+                    <button type="button" class="btn btn-outline-secondary" id="btn-font-dec" title="Letra txikiagotu">A-</button>
+                    <button type="button" class="btn btn-outline-secondary" id="btn-font-reset" title="Letra tamaina lehenetsia">A</button>
+                    <button type="button" class="btn btn-outline-secondary" id="btn-font-inc" title="Letra handitu">A+</button>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary" id="btn-theme-toggle" aria-label="Aldatu modu argia edo iluna">
+                    <span id="theme-icon">🌙</span> <span id="theme-label">Modu iluna</span>
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" id="btn-contrast-toggle" aria-pressed="false">
+                    ◐ Kontraste handia
+                </button>
+                <div class="d-flex align-items-center gap-1">
+                    <label for="select-colorblind" class="visually-hidden">Daltonismo mota</label>
+                    <select id="select-colorblind" class="form-select form-select-sm" style="width: auto;" aria-label="Daltonismo mota aukeratu">
+                        <option value="none">Kolore normala</option>
+                        <option value="protanopia">Protanopia (Gorria)</option>
+                        <option value="deuteranopia">Deuteranopia (Berdea)</option>
+                        <option value="tritanopia">Tritanopia (Urdina)</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-danger" id="btn-a11y-reset" title="Aukera guztiak berrezarri">
+                    ↺ Berrezarri
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="offcanvas offcanvas-end" tabindex="-1" id="rightDrawer" aria-labelledby="rightDrawerLabel">
         <div class="offcanvas-header border-bottom">
             <h5 class="offcanvas-title fw-bold text-primary" id="rightDrawerLabel">Menu Nagusia</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Itxi"></button>
         </div>
         <div class="offcanvas-body">
             <ul class="navbar-nav fs-5">
@@ -43,8 +97,8 @@
                 <li class="nav-item mb-2">
                     <a class="nav-link" href="./galdetegia.html">❓ Galdetegia</a>
                 </li>
-                <li class="nav-item dropdown mb-2">
-                    <a class="nav-link" href="./araudiorokorra.html">⚖️ Araudia</a>
+                <li class="nav-item mb-2">
+                    <a class="nav-link active fw-semibold text-primary" aria-current="page" href="./araudia.html">⚖️ Araudia</a>
                 </li>
                 <li class="nav-item mb-2">
                     <a class="nav-link" href="./about.html">👥 About Us</a>
@@ -53,96 +107,97 @@
         </div>
     </div>
 
-    <!-- Edukia -->
-    <div class="container my-5">
-        <div class="p-5 mb-4 bg-body-secondary rounded-3 shadow-sm">
-            <div class="container-fluid py-3">
-                <h1 class="display-5 fw-bold text-primary">Gradu Amaierako Lana (GrAL)</h1>
-                <p class="col-md-10 fs-4 text-secondary">EHUko Informatika Fakultateko Gradu Amaierako Lanen informazio-atari nagusia.</p>
-                <p class="lead">Gune honen helburua Euskal Herriko Unibertsitateko ikasleei zein irakasleei Informatika Ingeniaritzako Graduko eta Adimen Artifizialeko Graduko amaierako lanen inguruko informazio argia, egituratua eta praktikoa eskaintzea da.</p>
+    <div id="a11y-target">
+        <div class="container my-5">
+            <div class="p-5 mb-4 bg-body-secondary rounded-3 shadow-sm">
+                <div class="container-fluid py-3">
+                    <h1 class="display-5 fw-bold text-primary">Gradu Amaierako Lana (GrAL)</h1>
+                    <p class="col-md-10 fs-4 text-secondary">EHUko Informatika Fakultateko Gradu Amaierako Lanen informazio-atari nagusia.</p>
+                    <p class="lead">Gune honen helburua Euskal Herriko Unibertsitateko ikasleei zein irakasleei Informatika Ingeniaritzako Graduko eta Adimen Artifizialeko Graduko amaierako lanen inguruko informazio argia, egituratua eta praktikoa eskaintzea da.</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-7">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <h2 class="card-title h4 mb-3">Zer da Gradu Amaierako Lana?</h2>
+                            <p class="card-text">Gradu Amaierako Lana ikasle bakoitzak banaka eta modu autonomoan egin beharreko jatorrizko proiektu, memoria edo azterlan akademikoa da, irakasle zuzendari baten edo gehiagoren gidaritzapean garatzen dena.</p>
+                            <p class="card-text">Lanean zehar, graduko irakaskuntza-aldian jasotako prestakuntza-edukiak, gaitasunak eta trebetasunak integratu eta praktikan aplikatzen dira, ingeniaritzako edo zientziako dokumentu-egitura zorrotz bati jarraituz.</p>
+
+                            <ul class="list-group list-group-flush mt-3 rounded">
+                                <li class="list-group-item bg-transparent"><strong>Kreditu karga:</strong> 12 ECTS</li>
+                                <li class="list-group-item bg-transparent"><strong>Izaera:</strong> Derrigorrezko irakasgaia, ikasketa-planaren azken fasean kokatua</li>
+                                <li class="list-group-item bg-transparent"><strong>Egiletza:</strong> Banakako lana, ezin da elkarlanean egin (ez dago koautoretzarik)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <h2 class="card-title h4 mb-3">Eskaintzen diren Graduak eta Espezialitateak</h2>
+                            <p class="card-text">GrALa ikasleak hautatutako graduko ikasketen eta espezialitatearen barruan kokatzen da:</p>
+
+                            <h5 class="h6 mt-3 text-primary">1. Informatika Ingeniaritzako Gradua:</h5>
+                            <ul class="mb-2">
+                                <li>Softwarearen Ingeniaritza</li>
+                                <li>Konputagailuen Ingeniaritza</li>
+                                <li>Konputazioa</li>
+                            </ul>
+
+                            <h5 class="h6 mt-3 text-primary">2. Adimen Artifizialeko Gradua</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-2">
+                <div class="col-lg-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <h3 class="h5 mb-3">Garapenerako Funtsezko Ezaugarriak</h3>
+                            <h6 class="text-primary">Modalitateak:</h6>
+                            <ul>
+                                <li><strong>Adostutako lanak:</strong> Ikaslearen eta irakaslearen artean zuzenean definitutakoak.</li>
+                                <li><strong>Eskainitako lanak:</strong> Sailek urtero argitaratzen duten eskaintzatik aukeratutakoak.</li>
+                                <li><strong>Kanpo-erakundeetako lanak:</strong> Enpresetan edo mugikortasun-programetan (Erasmus/Séneca) egindakoak, unibertsitateko tutore batekin.</li>
+                            </ul>
+
+                            <h6 class="text-primary mt-3">Hizkuntza:</h6>
+                            <p>Memoria eta defentsa publikoa euskaraz, gaztelaniaz edo ingelesez egin daitezke, baina betiere memoria zein defentsa hizkuntza berean egingo dira.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <h3 class="h5 mb-3">Baldintzak, Etika eta Jabetza</h3>
+
+                            <h6 class="text-primary">Defentsarako gutxieneko baldintza:</h6>
+                            <p>Lana defendatu eta ebaluatu ahal izateko, ikasleari gehienez hautazko 3 irakasgai (18 kreditu hautazko) falta ahal zaizkio. Matrikula egiterakoan, ikasketa plana amaitzeko geratzen diren irakasgai guztietan matrikulatuta egon behar da.</p>
+
+                            <h6 class="text-primary mt-3">Balioak eta etika:</h6>
+                            <p>Lan guztiek giza eskubideen, berdintasunaren eta Garapen Jasangarriaren Helburuen (GJH / 2030 EHUagenda) inguruko gutxieneko 200 hitzeko gogoeta jaso behar dute. Implikazio etikoak dituzten lanek UPV/EHUko Etika Batzordearen edo Zerbitzuaren baimenak beharko dituzte.</p>
+
+                            <h6 class="text-primary mt-3">Jabetza intelektuala:</h6>
+                            <p>Eskubideak ikasleari dagozkio. Lana digitalizatu eta ADDI gordailu akademikoaren bidez argitaratu daiteke.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row g-4">
-            <div class="col-lg-7">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="card-body">
-                        <h2 class="card-title h4 mb-3">Zer da Gradu Amaierako Lana?</h2>
-                        <p class="card-text">Gradu Amaierako Lana ikasle bakoitzak banaka eta modu autonomoan egin beharreko jatorrizko proiektu, memoria edo azterlan akademikoa da, irakasle zuzendari baten edo gehiagoren gidaritzapean garatzen dena.</p>
-                        <p class="card-text">Lanean zehar, graduko irakaskuntza-aldian jasotako prestakuntza-edukiak, gaitasunak eta trebetasunak integratu eta praktikan aplikatzen dira, ingeniaritzako edo zientziako dokumentu-egitura zorrotz bati jarraituz.</p>
-                        
-                        <ul class="list-group list-group-flush mt-3 rounded">
-                            <li class="list-group-item bg-transparent"><strong>Kreditu karga:</strong> 12 ECTS</li>
-                            <li class="list-group-item bg-transparent"><strong>Izaera:</strong> Derrigorrezko irakasgaia, ikasketa-planaren azken fasean kokatua</li>
-                            <li class="list-group-item bg-transparent"><strong>Egiletza:</strong> Banakako lana, ezin da elkarlanean egin (ez dago koautoretzarik)</li>
-                        </ul>
-                    </div>
-                </div>
+        <footer class="bg-body-tertiary text-body py-4 mt-5 border-top">
+            <div class="container text-center">
+                <p class="mb-1 fw-bold">Informatika Fakultatea</p>
+                <p class="mb-0 text-secondary">Manuel Lardizabal pasealekua, 1, 20018 Donostia / San Sebastián, Gipuzkoa</p>
             </div>
-
-            <div class="col-lg-5">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="card-body">
-                        <h2 class="card-title h4 mb-3">Eskaintzen diren Graduak eta Espezialitateak</h2>
-                        <p class="card-text">GrALa ikasleak hautatutako graduko ikasketen eta espezialitatearen barruan kokatzen da:</p>
-                        
-                        <h5 class="h6 mt-3 text-primary">1. Informatika Ingeniaritzako Gradua:</h5>
-                        <ul class="mb-2">
-                            <li>Softwarearen Ingeniaritza</li>
-                            <li>Konputagailuen Ingeniaritza</li>
-                            <li>Konputazioa</li>
-                        </ul>
-
-                        <h5 class="h6 mt-3 text-primary">2. Adimen Artifizialeko Gradua</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row g-4 mt-2">
-            <div class="col-lg-6">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="card-body">
-                        <h3 class="h5 mb-3">Garapenerako Funtsezko Ezaugarriak</h3>
-                        <h6 class="text-primary">Modalitateak:</h6>
-                        <ul>
-                            <li><strong>Adostutako lanak:</strong> Ikaslearen eta irakaslearen artean zuzenean definitutakoak.</li>
-                            <li><strong>Eskainitako lanak:</strong> Sailek urtero argitaratzen duten eskaintzatik aukeratutakoak.</li>
-                            <li><strong>Kanpo-erakundeetako lanak:</strong> Enpresetan edo mugikortasun-programetan (Erasmus/Séneca) egindakoak, unibertsitateko tutore batekin.</li>
-                        </ul>
-
-                        <h6 class="text-primary mt-3">Hizkuntza:</h6>
-                        <p>Memoria eta defentsa publikoa euskaraz, gaztelaniaz edo ingelesez egin daitezke, baina betiere memoria zein defentsa hizkuntza berean egingo dira.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="card-body">
-                        <h3 class="h5 mb-3">Baldintzak, Etika eta Jabetza</h3>
-                        
-                        <h6 class="text-primary">Defentsarako gutxieneko baldintza:</h6>
-                        <p>Lana defendatu eta ebaluatu ahal izateko, ikasleari gehienez hautazko 3 irakasgai (18 kreditu hautazko) falta ahal zaizkio. Matrikula egiterakoan, ikasketa plana amaitzeko geratzen diren irakasgai guztietan matrikulatuta egon behar da.</p>
-
-                        <h6 class="text-primary mt-3">Balioak eta etika:</h6>
-                        <p>Lan guztiek giza eskubideen, berdintasunaren eta Garapen Jasangarriaren Helburuen (GJH / 2030 EHUagenda) inguruko gutxieneko 200 hitzeko gogoeta jaso behar dute. Implikazio etikoak dituzten lanek UPV/EHUko Etika Batzordearen edo Zerbitzuaren baimenak beharko dituzte.</p>
-
-                        <h6 class="text-primary mt-3">Jabetza intelektuala:</h6>
-                        <p>Eskubideak ikasleari dagozkio. Lana digitalizatu eta ADDI gordailu akademikoaren bidez argitaratu daiteke.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </footer>
     </div>
 
-    <!-- Oina -->
-    <footer class="bg-body-tertiary text-body py-4 mt-5 border-top">
-        <div class="container text-center">
-            <p class="mb-1 fw-bold">Informatika Fakultatea</p>
-            <p class="mb-0 text-secondary">Manuel Lardizabal pasealekua, 1, 20018 Donostia / San Sebastián, Gipuzkoa</p>
-        </div>
-    </footer>
-
+    <script src="./js/script.js"></script>
 </body>
 </html>
