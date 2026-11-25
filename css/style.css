@@ -40,3 +40,46 @@ html.a11y-vision-tritanopia #a11y-target {
 .a11y-bar {
     font-size: 0.9rem;
 }
+
+.gral-context-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.gral-context-image-contain {
+    width: 100%;
+    max-height: 260px;
+    object-fit: contain;
+}
+
+.gral-knight-image {
+    width: 100%;
+    max-height: 180px;
+    height: auto;
+    object-fit: contain;
+}
+
+.gral-photo-right {
+    width: 100%;
+    max-height: 280px;
+    height: 280px;
+    object-fit: contain;
+}
+
+.gral-card-photo,
+.gral-phase-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.gral-quiz-icon {
+    width: 64px;
+    height: 64px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.8rem;
+}
