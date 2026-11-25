@@ -3,7 +3,115 @@
 }
 
 html {
-    font-size: calc(16px * var(--font-scale));
+    font-size: 16px;
+}
+
+#a11y-target {
+    font-size: calc(1rem * var(--font-scale));
+}
+
+#a11y-target h1,
+#a11y-target .h1 {
+    font-size: clamp(1.375em, calc(1.375em + 1.5vw), 2.5em);
+}
+
+#a11y-target h2,
+#a11y-target .h2 {
+    font-size: clamp(1.325em, calc(1.325em + 0.9vw), 2em);
+}
+
+#a11y-target h3,
+#a11y-target .h3 {
+    font-size: clamp(1.3em, calc(1.3em + 0.6vw), 1.75em);
+}
+
+#a11y-target h4,
+#a11y-target .h4 {
+    font-size: clamp(1.275em, calc(1.275em + 0.3vw), 1.5em);
+}
+
+#a11y-target h5,
+#a11y-target .h5 {
+    font-size: 1.25em;
+}
+
+#a11y-target h6,
+#a11y-target .h6 {
+    font-size: 1em;
+}
+
+#a11y-target .display-1 {
+    font-size: clamp(1.625em, calc(1.625em + 4.5vw), 5em);
+}
+
+#a11y-target .display-2 {
+    font-size: clamp(1.575em, calc(1.575em + 3.9vw), 4.5em);
+}
+
+#a11y-target .display-3 {
+    font-size: clamp(1.525em, calc(1.525em + 3.3vw), 4em);
+}
+
+#a11y-target .display-4 {
+    font-size: clamp(1.475em, calc(1.475em + 2.7vw), 3.5em);
+}
+
+#a11y-target .display-5 {
+    font-size: clamp(1.425em, calc(1.425em + 2.1vw), 3em);
+}
+
+#a11y-target .display-6 {
+    font-size: clamp(1.375em, calc(1.375em + 1.5vw), 2.5em);
+}
+
+#a11y-target .fs-1 {
+    font-size: 2.5em !important;
+}
+
+#a11y-target .fs-2 {
+    font-size: 2em !important;
+}
+
+#a11y-target .fs-3 {
+    font-size: 1.75em !important;
+}
+
+#a11y-target .fs-4 {
+    font-size: 1.5em !important;
+}
+
+#a11y-target .fs-5 {
+    font-size: 1.25em !important;
+}
+
+#a11y-target .fs-6 {
+    font-size: 1em !important;
+}
+
+#a11y-target .lead {
+    font-size: 1.25em;
+}
+
+#a11y-target .btn,
+#a11y-target .form-control,
+#a11y-target .form-select,
+#a11y-target .form-check-label {
+    font-size: 1em;
+}
+
+#a11y-target .btn-sm {
+    font-size: 0.875em;
+}
+
+#a11y-target .btn-lg {
+    font-size: 1.25em;
+}
+
+@media (max-width: 991.98px) {
+    html.a11y-font-large #a11y-target .row > [class*="col-md-"] {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }
 
 /* Kontraste handia */

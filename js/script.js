@@ -1,7 +1,7 @@
 (function () {
     const STORAGE_KEY = 'gralgunea_a11y_v1';
     const DEFAULT_STATE = {
-        theme: 'light',
+        theme: 'dark',
         fontScale: 1,
         highContrast: false,
         colorblind: 'none'
@@ -58,6 +58,7 @@
         // 2. Letra tamaina
         const cleanScale = Number(state.fontScale.toFixed(2));
         htmlEl.style.setProperty('--font-scale', cleanScale);
+        htmlEl.classList.toggle('a11y-font-large', cleanScale >= 1.2);
 
         // 3. Kontraste handia
         htmlEl.classList.toggle('a11y-high-contrast', Boolean(state.highContrast));
