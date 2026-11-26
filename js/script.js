@@ -65,6 +65,9 @@
         if (contrastBtn) {
             contrastBtn.setAttribute('aria-pressed', String(Boolean(state.highContrast)));
             contrastBtn.classList.toggle('active', Boolean(state.highContrast));
+            contrastBtn.textContent = state.highContrast
+                ? '✓ Kontraste altua aktibo'
+                : '◐ Kontraste handia';
         }
 
         // 4. Daltonismo mota

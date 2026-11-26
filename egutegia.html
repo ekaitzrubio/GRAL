@@ -9,24 +9,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 
-<body>
-    <svg xmlns="http://www.w3.org/2000/svg" class="d-none" aria-hidden="true">
+<body class="bg-body-tertiary">
+    <svg xmlns="http://www.w3.org/2000/svg" class="visually-hidden" aria-hidden="true">
         <defs>
-            <filter id="protanopia-filter">
+            <filter id="protanopia-filter" color-interpolation-filters="sRGB">
                 <feColorMatrix type="matrix" values="
                     0.567 0.433 0.000 0 0
                     0.558 0.442 0.000 0 0
                     0.000 0.242 0.758 0 0
                     0.000 0.000 0.000 1 0" />
             </filter>
-            <filter id="deuteranopia-filter">
+            <filter id="deuteranopia-filter" color-interpolation-filters="sRGB">
                 <feColorMatrix type="matrix" values="
                     0.625 0.375 0.000 0 0
                     0.700 0.300 0.000 0 0
                     0.000 0.300 0.700 0 0
                     0.000 0.000 0.000 1 0" />
             </filter>
-            <filter id="tritanopia-filter">
+            <filter id="tritanopia-filter" color-interpolation-filters="sRGB">
                 <feColorMatrix type="matrix" values="
                     0.950 0.050 0.000 0 0
                     0.000 0.433 0.567 0 0
@@ -36,18 +36,26 @@
         </defs>
     </svg>
 
-    <nav class="navbar bg-body-tertiary shadow-sm sticky-top">
+    <a class="visually-hidden-focusable position-fixed top-0 start-0 m-3 p-3 z-3 text-white bg-primary rounded-3" href="#a11y-target">Joan edukira</a>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm sticky-top py-2">
         <div class="container-fluid px-4">
             <a class="navbar-brand fw-bold fs-4 text-primary" href="./index.html">GrALgunea</a>
+            <ul class="navbar-nav flex-row flex-wrap gap-1 ms-lg-auto me-lg-3 d-none d-lg-flex">
+                <li class="nav-item"><a class="nav-link" href="./index.html">Hasiera</a></li>
+                <li class="nav-item"><a class="nav-link active fw-semibold" aria-current="page" href="./egutegia.html">Egutegia</a></li>
+                <li class="nav-item"><a class="nav-link" href="./memoriak.html">Memoriak</a></li>
+                <li class="nav-item"><a class="nav-link" href="./galdetegia.html">Galdetegia</a></li>
+                <li class="nav-item"><a class="nav-link" href="./araudiorokorra.html">Araudia</a></li>
+            </ul>
             <div class="d-flex align-items-center gap-2">
-                <button class="btn btn-primary d-flex align-items-center justify-content-center p-2 rounded-circle shadow-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#rightDrawer" aria-controls="rightDrawer" aria-label="Menua ireki" style="width: 42px; height: 42px;">
-                    <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+                <button class="btn btn-outline-primary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#rightDrawer" aria-controls="rightDrawer">
+                    <span aria-hidden="true">☰</span> Menua
                 </button>
             </div>
         </div>
     </nav>
 
-    <div class="a11y-bar bg-body-secondary border-bottom py-2 px-4" role="region" aria-label="Irisgarritasun aukerak">
+    <div class="small bg-body-secondary border-bottom py-2 px-4" role="region" aria-label="Irisgarritasun aukerak">
         <div class="container-fluid d-flex flex-wrap align-items-center justify-content-between gap-2">
             <span class="fw-semibold text-body">♿ Irisgarritasuna:</span>
             <div class="d-flex flex-wrap align-items-center gap-2">
@@ -64,7 +72,7 @@
                 </button>
                 <div class="d-flex align-items-center gap-1">
                     <label for="select-colorblind" class="visually-hidden">Daltonismo mota</label>
-                    <select id="select-colorblind" class="form-select form-select-sm" style="width: auto;" aria-label="Daltonismo mota aukeratu">
+                    <select id="select-colorblind" class="form-select form-select-sm w-auto" aria-label="Daltonismo mota aukeratu">
                         <option value="none">Kolore normala</option>
                         <option value="protanopia">Protanopia (Gorria)</option>
                         <option value="deuteranopia">Deuteranopia (Berdea)</option>
@@ -109,18 +117,19 @@
 
     <div id="a11y-target">
         <div class="container my-5">
-            <div class="p-5 mb-4 bg-body-secondary rounded-3 shadow-sm">
+            <div class="p-4 p-md-5 mb-4 bg-primary text-white rounded-4 shadow-sm">
                 <div class="container-fluid py-3">
-                    <h1 class="display-5 fw-bold text-primary">Egutegia eta Epeak</h1>
-                    <p class="col-md-10 fs-4 text-secondary">Gradu Amaierako Lana arrakastaz bideratzeko epeak eta faseak.</p>
-                    <p class="lead">Gradu Amaierako Lana arrakastaz bideratzeko, funtsezkoa da urrats bakoitza garaiz eta forman egitea. Hemen aurkituko dituzu ikasturtean zehar jarraitu beharreko fase nagusiak eta deialdi desberdinen epeak.</p>
+                    <span class="badge text-bg-light text-primary mb-3">Prozesua eta epeak</span>
+                    <h1 class="display-5 fw-bold">Egutegia eta Epeak</h1>
+                    <p class="col-md-10 fs-4 mb-3">Gradu Amaierako Lana arrakastaz bideratzeko epeak eta faseak.</p>
+                    <p class="lead mb-0">Gradu Amaierako Lana arrakastaz bideratzeko, funtsezkoa da urrats bakoitza garaiz eta forman egitea. Hemen aurkituko dituzu ikasturtean zehar jarraitu beharreko fase nagusiak eta deialdi desberdinen epeak.</p>
                 </div>
             </div>
 
             <div class="row g-4 mb-5">
                 <div class="col-md-6">
                     <div class="card h-100 shadow-sm border-0 overflow-hidden">
-                        <img src="./img/egutegia-estudiantes.jpg" class="gral-context-image" alt="Ikasle talde bat gradu-lanaren proiektuan lanean">
+                        <img src="./img/egutegia-estudiantes.jpg" class="gral-context-image w-100 object-fit-cover" alt="Ikasle talde bat gradu-lanaren proiektuan lanean">
                         <div class="card-body">
                             <h2 class="h5 text-primary">Lan antolatua, bide argia</h2>
                             <p class="card-text small mb-0">Zuzendaritzarekin egindako tutoretza-elkarrizketak eta erabakitako hurrengo urratsak idatziz antolatzea gomendatzen da.</p>
@@ -129,7 +138,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="card h-100 shadow-sm border-0 overflow-hidden">
-                        <img src="./img/egutegia-defentsa.jpg" class="gral-context-image" alt="Egutegia eta epeak markatutako egutegia">
+                        <img src="./img/egutegia-defentsa.jpg" class="gral-context-image w-100 object-fit-cover" alt="Egutegia eta epeak markatutako egutegia">
                         <div class="card-body">
                             <h2 class="h5 text-primary">Kontuan hartu epeak</h2>
                             <p class="card-text small mb-0">Matrikula, memoria kargatzea eta defentsa egun batzuk ez dira lotzen: bakoitzak bere epea du, eta data zehatza Fakultateak urtero argitaratzen du.</p>
@@ -147,7 +156,7 @@
                         <div class="card h-100 shadow-sm border-0">
                             <div class="card-body">
                                 <span class="badge bg-primary mb-2">1. Fasea</span>
-                                <img src="./img/egutegia-inskripzioa.jpg" class="gral-phase-image rounded mb-3" alt="Ikasle talde bat gradu-lanaren gaia elkarrekin aukeratzen">
+                                <img src="./img/egutegia-inskripzioa.jpg" class="gral-phase-image w-100 object-fit-cover rounded mb-3" alt="Ikasle talde bat gradu-lanaren gaia elkarrekin aukeratzen">
                                 <h5 class="card-title">Inskripzioa eta Gai Aukeraketa</h5>
                                 <ul class="card-text small ps-3 mt-2">
                                     <li><strong>Adostutako lanak:</strong> Ikaslea irakaslearekin harremanetan jartzen da lana definitzeko.</li>
@@ -162,7 +171,7 @@
                         <div class="card h-100 shadow-sm border-0">
                             <div class="card-body">
                                 <span class="badge bg-primary mb-2">2. Fasea</span>
-                                <img src="./img/egutegia-matrikula.jpg" class="gral-phase-image rounded mb-3" alt="Ikasleak ordenagailuan unibertsitateko matrikula egiten">
+                                <img src="./img/egutegia-matrikula.jpg" class="gral-phase-image w-100 object-fit-cover rounded mb-3" alt="Ikasleak ordenagailuan unibertsitateko matrikula egiten">
                                 <h5 class="card-title">Matrikulazioa</h5>
                                 <p class="card-text small">Unibertsitatearen matrikula-epe orokorrean egiten da (gradua amaitzeko falta diren irakasgai guztietan matrikulatuta egon behar da).</p>
                             </div>
@@ -173,7 +182,7 @@
                         <div class="card h-100 shadow-sm border-0">
                             <div class="card-body">
                                 <span class="badge bg-primary mb-2">3. Fasea</span>
-                                <img src="./img/apuntes.jpg" class="gral-phase-image rounded mb-3" alt="Apunteak eta boligrafoak gradu-lanaren garapenean">
+                                <img src="./img/apuntes.jpg" class="gral-phase-image w-100 object-fit-cover rounded mb-3" alt="Apunteak eta boligrafoak gradu-lanaren garapenean">
                                 <h5 class="card-title">Garapena & Tutoretzak</h5>
                                 <p class="card-text small">Zuzendariaren gidaritzapean lana egiten da, gutxienez 200 hitzeko Garapen Jasangarriaren Helburuen gogoeta eta atal etikoak txertatuz.</p>
                             </div>
@@ -184,7 +193,7 @@
                         <div class="card h-100 shadow-sm border-0">
                             <div class="card-body">
                                 <span class="badge bg-primary mb-2">4. Fasea</span>
-                                <img src="./img/egutegia-addi.jpg" class="gral-phase-image rounded mb-3" alt="Ordenagailu eramangarria eta lan akademiko digitala">
+                                <img src="./img/egutegia-addi.jpg" class="gral-phase-image w-100 object-fit-cover rounded mb-3" alt="Ordenagailu eramangarria eta lan akademiko digitala">
                                 <h5 class="card-title">ADDI Gordailua</h5>
                                 <p class="card-text small">Lana amaitzean, memoria digitala (eta aukeran posterra) UPV/EHUko ADDI gordailu akademikoan kargatzen da.</p>
                             </div>
@@ -195,7 +204,7 @@
                         <div class="card h-100 shadow-sm border-0">
                             <div class="card-body">
                                 <span class="badge bg-primary mb-2">5. Fasea</span>
-                                <img src="./img/egutegia-defentsa-publikoa.jpg" class="gral-phase-image rounded mb-3" alt="Ikasle bat bere lana ikusleen aurrean defendatzen">
+                                <img src="./img/egutegia-defentsa-publikoa.jpg" class="gral-phase-image w-100 object-fit-cover rounded mb-3" alt="Ikasle bat bere lana ikusleen aurrean defendatzen">
                                 <h5 class="card-title">Defentsa Publikoa</h5>
                                 <p class="card-text small">Prozesu osoa burutu ondoren lana izendatutako epaimahai baten aurrean aurkeztu eta defendatu egiten da.</p>
                             </div>
